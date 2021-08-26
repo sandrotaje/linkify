@@ -1,0 +1,22 @@
+{
+  "name": "Open Jira",
+  "description": "Open jira searching SBL key inside the page",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {},
+  "permissions": ["activeTab", "scripting"],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Ctrl+Shift+J",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      }
+    }
+  },
+  "icons": { "128": "icon.png" }
+}
