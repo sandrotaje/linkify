@@ -1,19 +1,24 @@
-function openJira() {
-  let jiraLink = "https://devportal.internal.unicreditgroup.eu:8443/browse/";
+function open() {
   let val = window.prompt("SBL key?");
+  let url = "https://devportal.internal.unicreditgroup.eu:8443/browse/";
+  if (val.startsWith("g")) {
+    val = val.substr(1);
+    url =
+      "https://github.com/buildo/unicredit-cz-with-externals/pulls?q=is%3Apr+";
+  }
+
   let array = Array.from(
     document.body.innerText.matchAll(/SBL-\d+/gm),
-    (m) => jiraLink + m[0]
+    (m) => m[0]
   );
-  let withoutDup = [...new Set(array)];
-  let filtered = withoutDup.filter((el) => el.includes(val));
+  let filtered = [...new Set(array)].filter((el) => el.includes(val));
   if (filtered.length === 1) {
-    window.open(filtered[0]);
+    window.open(url + filtered[0]);
   } else {
     if (val.includes("SBL")) {
-      window.open(jiraLink + val);
+      window.open(url + val);
     } else {
-      window.open(jiraLink + "SBL-" + val);
+      window.open(url + "SBL-" + val);
     }
   }
 }
@@ -21,6 +26,6 @@ function openJira() {
 chrome.action.onClicked.addListener((tab) => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: openJira,
+    function: open,
   });
 });
