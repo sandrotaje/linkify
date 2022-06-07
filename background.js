@@ -1,24 +1,24 @@
 function open() {
-  let val = window.prompt("SBL key?");
-  let url = "https://devportal.internal.unicreditgroup.eu:8443/browse/";
-  if (val.startsWith("g")) {
-    val = val.substr(1);
-    url =
-      "https://github.com/buildo/unicredit-cz-with-externals/pulls?q=is%3Apr+";
-  }
+  let val = window.prompt("AOC key?");
+  let url = "https://aliniq.atlassian.net/browse/";
+  // if (val.startsWith("g")) {
+  //   val = val.substr(1);
+  //   url =
+  //     "https://github.com/buildo/unicredit-cz-with-externals/pulls?q=is%3Apr+";
+  // }
 
   let array = Array.from(
-    document.body.innerText.matchAll(/SBL-\d+/gm),
+    document.body.innerText.matchAll(/AOC-\d+/gm),
     (m) => m[0]
   );
   let filtered = [...new Set(array)].filter((el) => el.includes(val));
   if (filtered.length === 1) {
     window.open(url + filtered[0]);
   } else {
-    if (val.includes("SBL")) {
+    if (val.includes("AOC")) {
       window.open(url + val);
     } else {
-      window.open(url + "SBL-" + val);
+      window.open(url + "AOC-" + val);
     }
   }
 }
